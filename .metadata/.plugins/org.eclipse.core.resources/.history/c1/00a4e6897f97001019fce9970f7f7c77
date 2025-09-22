@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>안녕하세요 인 덱스입니다</title>
+<style>
+	h1{
+		color : red;
+		text-align: center;
+		
+	}
+</style>
+</head>
+<body>
+	<!-- 
+		1) 새로운 워크스페이스를 만들어서 이클립스로 열기
+		
+		2) 작업 환경 구성
+		
+			2_1) 보여질 U.I를 구성
+			
+			2_2) 서버 실행환경 구성[Window - Preferences]
+	
+			
+	 -->
+
+	<h1>이게 뭐야~~ 이게 인덱스가 뭐야 배열 아니야~~</h1>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>안녕하세요 인 덱스입니다</title>
+<style>
+	h1{
+		color : red;
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+	<h1>이게 뭐야~~ 이게 인덱스가 뭐야 배열 아니야~~</h1>
+</body>
+</html>

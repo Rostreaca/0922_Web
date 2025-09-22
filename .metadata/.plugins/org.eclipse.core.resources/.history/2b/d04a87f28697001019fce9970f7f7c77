@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Get 방식 요청 테스트</title>
+<style>
+	ul {
+		list-style : none;
+		line-height : 200%;
+	}
+</style>
+</head>
+<body>
+	<h1>GET방식으로 요청 후 응답데이터 받아보기</h1>
+</body>
+</html>
