@@ -162,7 +162,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="C:\eclipseide\web-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\eclipseide\web-workspace\MyFirstWebProject\src\main\webapp" path="/first" reloadable="true" source="org.eclipse.jst.jee.server:MyFirstWebProject"><Resources><PreResources base="C:\eclipseide\web-workspace\MyFirstWebProject\src\main\webapp\WEB-INF\classes" classLoaderOnly="false" className="org.apache.catalina.webresources.DirResourceSet" internalPath="/" webAppMount="/WEB-INF/classes"/></Resources></Context></Host>
+      <Context docBase="C:\eclipseide\web-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\eclipseide\web-workspace\Subway\src\main\webapp" path="/subway" reloadable="true" source="org.eclipse.jst.jee.server:Subway"><Resources><PreResources base="C:\eclipseide\web-workspace\Subway\src\main\webapp\WEB-INF\classes" classLoaderOnly="false" className="org.apache.catalina.webresources.DirResourceSet" internalPath="/" webAppMount="/WEB-INF/classes"/></Resources></Context></Host>
     </Engine>
   </Service>
 </Server>

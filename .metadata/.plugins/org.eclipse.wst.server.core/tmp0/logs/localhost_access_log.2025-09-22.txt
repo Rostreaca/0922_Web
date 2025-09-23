@@ -57,3 +57,5 @@
 127.0.0.1 - - [22/Sep/2025:17:48:56 +0900] "GET /first/get.do?name=&age=&city=%EC%84%9C%EC%9A%B8&height=175 HTTP/1.1" 404 823
 127.0.0.1 - - [22/Sep/2025:17:48:59 +0900] "GET /first/views/request_get.html HTTP/1.1" 304 -
 127.0.0.1 - - [22/Sep/2025:17:49:00 +0900] "GET /first/get.do?name=&age=&city=%EC%84%9C%EC%9A%B8&height=175 HTTP/1.1" 404 823
+127.0.0.1 - - [22/Sep/2025:17:49:10 +0900] "GET / HTTP/1.1" 404 807
+127.0.0.1 - - [22/Sep/2025:17:49:14 +0900] "GET /first/get.do?name=&age=&city=%EC%84%9C%EC%9A%B8&height=175 HTTP/1.1" 200 -
