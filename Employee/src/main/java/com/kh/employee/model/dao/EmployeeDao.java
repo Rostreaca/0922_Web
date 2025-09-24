@@ -11,5 +11,8 @@ public class EmployeeDao {
 	public List<Employee> findAll(SqlSession session){
 		return session.selectList("employeeMapper.findAll");
 	}
-	
+
+	public int insertEmployee(SqlSession session, Employee employee) {
+		return session.insert("employeeMapper.insertEmployee",employee);
+	}
 }

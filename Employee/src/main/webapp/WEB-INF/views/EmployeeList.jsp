@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>사원 조회</title>
 <style>
 	table, tr, td, th{
 		border: 1px solid grey;

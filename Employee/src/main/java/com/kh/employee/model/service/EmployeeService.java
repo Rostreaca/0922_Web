@@ -22,5 +22,21 @@ public class EmployeeService {
 		
 		return employees;
 	}
+	
+	public int insertEmployee(Employee employee) {
+		
+		SqlSession session = Template.getSqlSession();
+		
+		int result = ed.insertEmployee(session,employee);
+		
+		if(result>0) {
+			session.commit();
+		}
+		
+		session.close();
+		
+		return result;
+		
+	}
 
 }
