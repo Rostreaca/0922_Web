@@ -7,6 +7,10 @@
 <title>사원</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
+<!--1. Servers의 Tomcat클릭해서 Runtime Environment 클릭-> browse로 톰캣 경로 변경바람.
+	2. 프로젝트의 properties - > project facets에서 dynamic web project -> runtime에서 tomcat 체크
+ -->
+
 <style>
 	
 	body{
@@ -105,6 +109,12 @@
 							</td>
 							</tr>
 							<tr>
+							<th>급여등급</th>
+							<td>
+								<input type="text" name="salLevel" class="form-control" value="s1"><br>
+							</td>
+							</tr>
+							<tr>
 							<th>보너스</th>
 							<td>
 								<input type="number" name="bonus" class="form-control" value=0>
@@ -113,7 +123,7 @@
 							<tr>
 							<th>사수정보</th>
 							<td>
-								<input type="text" name="" class="form-control">
+								<input type="text" name="managerId" class="form-control">
 							</td>
 							</tr>
 							
