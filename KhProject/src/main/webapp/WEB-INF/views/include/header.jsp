@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -98,25 +99,31 @@
             <a class="nav-link js-scroll-trigger" href="#">사진게시판</a>
           </li>
           
+          <!-- 
+          	로그인 전 : 로그인 / 회원가입
+          	로그인 후 : 내정보 / 로그아웃
+           -->
           
-          
+          <c:choose>
+          <c:when test="${ empty sessionScope.userInfo }">
           <li class="nav-item">
           <a class="nav-link js-scroll-trigger" data-toggle="modal" data-target="#log-in">로그인</a>
           </li>
           <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="join">회원가입</a>
           </li>
+          </c:when>
           
-         
-
-          
+          <c:otherwise>
           <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="myPage">내정보</a>
           </li>
           <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="logout" onclick="return confirm('진짜로 로그아웃 하려고?')">로그아웃</a>
           </li>
+          </c:otherwise>
           
+          </c:choose>
           
         </ul>
       </div>

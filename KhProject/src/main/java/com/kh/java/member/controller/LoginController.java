@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.java.member.model.service.MemberService;
 import com.kh.java.member.model.vo.Member;
@@ -55,10 +56,59 @@ public class LoginController extends HttpServlet {
 		// 스텝 2. RequestDispatcher => 뷰 지정
 		// 스텝 3. RequestDispatcher이용해서 forward()호출
 		
+		// 1. 로그인된 사용자의 정보를 어딘가에 담을 것(application, session
+		// request, page
+		
+		/*
+		 * 크다
+		 * 1) application : 웹 애플리케이션 전역에서 사용 가능
+		 * 					(일반 자바 클래스에서 값을 사용할 수 있음)
+		 * 
+		 * 2) session : 모든 JSP와 Servlet에서 꺼내 쓸 수 있음
+		 * 				단, session에 값이 지워지기 전까지
+		 * 				세션 종료 시점 : 브라우저 종료, 서버 멈춤, 코드로 지움(로그아웃)
+		 * 
+		 * 3) request : 해당 request를 포워딩한 응답 JSP에서만 쓸 수 있음
+		 * 				요청부터 응답까지만 딱 쓸 수 있음
+		 * 
+		 * 4) page : 값을 담은 JSP에서만 쓸 수 있음
+		 * 
+		 * 
+		 * 작다
+		 * 
+		 * => session, request를 많이 사용함
+		 * 
+		 */
+		
+		// 로그인에 성공할 수 도 있음 / 실패할 수 도있음
+		// 2. 성공실패 여부에 따라서 응답 페이지 다르게 보내주기
+		
+		if(loginMember != null) {
+			// 로그인에 성공했다!!
+			
+			// 사용자의 정보를 앞단에 넘기기
+			// 로그인한 회원의 정보를 로그아웃하거나
+			// 브라우저를 종료하기 전까지는 계속해서 유지하고 사용할 것이기 때문에
+			// session에 담기
+			
+			// 스텝 1. session의 Attribute로 사용자 정보 추가
+			// session의 타입 : HttpSession
+			// => 현재 요청 보내는 Client의 Session : request.getSession();
+			HttpSession session = request.getSession();
+			session.setAttribute("userInfo", loginMember);
+			
+			// 스텝 2. RequestDispatcher get해오기
+			request.getRequestDispatcher("/index.jsp")
+			       .forward(request, response);
+			
+			
+			
+			
+		} else {
 		// 실패했다!
 		request.setAttribute("msg", "로그인에 실패했습니다.");
-		request.getRequestDispatcher("");
-		
+		request.getRequestDispatcher("/WEB-INF/views/common/result_page.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
