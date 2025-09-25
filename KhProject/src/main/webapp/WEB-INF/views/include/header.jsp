@@ -103,7 +103,7 @@
           	로그인 전 : 로그인 / 회원가입
           	로그인 후 : 내정보 / 로그아웃
            -->
-          
+          <%-- <c:when> 얘는 여기 choose에 들어가면 안된다 --%>
           <c:choose>
           <c:when test="${ empty sessionScope.userInfo }">
           <li class="nav-item">
