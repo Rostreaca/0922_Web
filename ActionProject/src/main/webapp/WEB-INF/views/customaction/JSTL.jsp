@@ -253,6 +253,7 @@
 		<table border="1">
 			<thead>
 				<tr>
+					<th>순번</th>
 					<th>이름</th>
 					<th>나이</th>
 					<th>주소</th>
@@ -267,8 +268,10 @@
 						</tr>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="p" items="${ list }">
+						<c:forEach var="p" items="${ list }" varStatus="s">
 							 <tr>
+							 	<!-- index : 0부터 / count : 1부터 -->
+							 	<td>${ s.count }</td>
 							 	<td>${ p.name }</td>
 							 	<td>${ p.age }</td>
 							 	<td>${ p.address }</td>
@@ -277,8 +280,41 @@
 					</c:otherwise>
 				</c:choose>
 			</tbody>
-			
+			<tfoot>
+				<tr>
+					<th colspan="3">총합</th>
+					<td>${ list.size() }명</td>
+				</tr>
+			</tfoot>
 		</table>
+		
+		<hr>
+		
+		<h5>5. 반복문 - forTokens </h5>
+		
+		<pre>
+			[ 표현법 ] <br>
+			
+			&lt;c:forTokens var="값을보관할속성명" items="분리하고자하는문자열" delims="구분자">
+			
+				반복적으로 실행할 문구(출력만)
+			
+			&lt;/c:forTokens>
+			
+			- JAVA의 StringTokenizer와 비슷한 역할
+			- 구분자를 통해 분리된 각각의 문자열에 순차적으로 접근하면서 반복 수행
+		</pre>
+		
+		<!-- 테스트할 값 -->
+		<c:set var="device" value="컴퓨터,핸드폰,TV/에어컨.냉장고-세탁기"/>
+		
+		<ul>
+			<c:forTokens var="d" items="${ device }" delims=",/.-">
+				<li>${ d }</li>
+			</c:forTokens>
+		</ul>
+		
+		
 		
 </body>
 </html>
