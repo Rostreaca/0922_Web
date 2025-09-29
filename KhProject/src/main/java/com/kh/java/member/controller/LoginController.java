@@ -98,9 +98,19 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("userInfo", loginMember);
 			
 			// 스텝 2. RequestDispatcher get해오기
+			/*
 			request.getRequestDispatcher("/index.jsp")
 			       .forward(request, response);
+			*/
 			
+			// localhost:4000/kh
+			// sendRedirect : Client에게 URL을 다시 요청하게 함
+			// response객체를 이용
+			// 재요청방식
+			// response.sendRedirect("/다시 요청보낼 URL경로");
+			
+			session.setAttribute("alertMsg", "로그인에 성공~");
+			response.sendRedirect(request.getContextPath());
 			
 			
 			

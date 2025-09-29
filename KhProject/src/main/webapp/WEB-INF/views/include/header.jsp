@@ -73,6 +73,13 @@
 
 <body id="page-top">
 
+  <c:if test="${ not empty alertMsg }">
+  <script>
+  		alert("${ alertMsg }");
+  </script>
+  <c:remove var="alertMsg" scope="session"/>
+  </c:if>
+  
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
@@ -180,6 +187,7 @@
 								<p><strong>로그인하셔서 서비스를 이용해보세요~~!</strong></p>
 							</td>
 						</tr>
+						
 						<tr>
 							<td style="width: 100%; text-align: center; colspan: 2;"><input
 								type="submit" value="로그인" class="btn form-control tooltipstered" id="signIn-btn"
