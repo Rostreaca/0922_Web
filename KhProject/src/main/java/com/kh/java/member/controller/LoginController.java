@@ -38,8 +38,8 @@ public class LoginController extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 		
-		System.out.println(userId);
-		System.out.println(userPwd);
+//		System.out.println(userId);
+//		System.out.println(userPwd);
 		
 		Member member = new Member();
 		member.setUserId(userId);
