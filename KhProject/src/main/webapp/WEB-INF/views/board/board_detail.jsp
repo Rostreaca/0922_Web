@@ -71,19 +71,25 @@
 		             style="background-color: #52b1ff; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8"
 		          >목록</a>&nbsp;&nbsp;
 		          
+		          <!-- 
+		          	버튼 두 개를 게시글 작성자만 볼 수 있게 하고 싶음
+		          	사용자의 식별 : MEMBER -> PK(USER_NO), UNIQUE(USER_ID)
+		          	
+		           -->
 		          
+		          <c:if test="${ userInfo.userNo eq map.boardWriter }">
 			          <a 
 			            class="btn" 
-			            href="수정요청 매핑값"
+			            href="updateForm.board?boardNo=${ map.board.boardNo }"
 			      		style="background-color: orange; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8"
 			      		>수정</a>&nbsp;&nbsp;
 			          
 			          <a 
 			            class="btn" 
-			            href="삭제하기" onclick="return confirm('정말로 삭제하시겠습니까?')"
+			            href="delete.board?boardNo=${ map.board.boardNo }" onclick="return confirm('정말로 삭제하시겠습니까?')"
 			      		style="background-color: red; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8"
 			      		>삭제</a>&nbsp;&nbsp;
-
+			      </c:if>
 		      </div>
 		    </div>
 		  </div>

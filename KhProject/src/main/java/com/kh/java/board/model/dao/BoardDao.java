@@ -43,4 +43,16 @@ public class BoardDao {
 		return sqlSession.selectOne("boardMapper.selectAttachment",boardNo);
 	}
 	
+	public Long selectBoardWriter(SqlSession sqlSession, int boardNo) {
+		return sqlSession.selectOne("boardMapper.selectBoardWriter",boardNo);
+	}
+	
+	public int deleteBoard(SqlSession sqlSession, Board board) {
+		return sqlSession.update("boardMapper.deleteBoard",board);
+	}
+	
+	public int deleteAttachment(SqlSession sqlSession, Long boardNo) {
+		return sqlSession.update("boardMapper.deleteAttachment",boardNo);
+	}
+	
 }

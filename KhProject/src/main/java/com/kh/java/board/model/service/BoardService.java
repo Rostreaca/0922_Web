@@ -90,16 +90,39 @@ public class BoardService {
 			sqlSession.commit();
 			Board board = bd.selectBoard(sqlSession, boardNo);
 			Attachment at = bd.selectAttachment(sqlSession, boardNo);
+			Long userNo = bd.selectBoardWriter(sqlSession, boardNo);
 //			System.out.println(board);
 //			System.out.println(at);
 			Map<String, Object> map = new HashMap();
 			map.put("board", board);
 			map.put("at", at);
+			map.put("boardWriter", userNo);
 			
 			return map;
 		}
 		
 		return null;
+		
+	}
+	
+	public int deleteBoard(Board board) {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = bd.deleteBoard(sqlSession,board);
+		Attachment at = bd.selectAttachment(sqlSession, board.getBoardNo().intValue());
+		int result2 = 1;
+		if(at != null) {
+			result2 = bd.deleteAttachment(sqlSession,board.getBoardNo());
+		}
+		
+		if(result * result2 > 0) {
+			sqlSession.commit();
+		} else {
+			sqlSession.rollback();
+		}
+		
+		return result * result2;
 		
 	}
 	
