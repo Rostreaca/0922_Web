@@ -58,6 +58,10 @@ tr:hover{
                         </td>
                         <td style="color: #52d6ffcc;">
                         ${ board.boardTitle } &nbsp;
+                        <!-- 
+                        <a href="">
+                         -->
+                        
                         </td>
                         <td>
                         ${ board.createDate }
@@ -70,10 +74,24 @@ tr:hover{
                   </tbody>
                   
                </table>               
-            </div>            
-         </div>
-      </div>
-         <div class="paging-area" align="center" >
+            </div>   
+            <script>
+            	$(function(){
+            		
+            		$('.board').click(e =>{
+            			
+            			//console.log(e.currentTarget.id);
+            			const targetId = e.currentTarget.id;
+            			location.href = `detail.board?boardNo=\${targetId}`;
+            			
+            		});
+            		
+            		
+            	});
+            
+            </script>
+            
+            <div class="paging-area" align="center" >
         	
         	
         		<c:if test="${ pi.currentPage > 1 }">
@@ -96,7 +114,10 @@ tr:hover{
 	       		<button 
 	       		class="btn btn-outline-primary" style="color:#52b1ff;"
 	       		onclick="location.href='boards?page=${pi.endPage + 1}'">다다음</button>
-        </div>
+        </div>         
+         </div>
+      </div>
+         
       
       
       
