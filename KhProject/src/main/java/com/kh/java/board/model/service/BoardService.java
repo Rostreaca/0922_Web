@@ -219,9 +219,18 @@ public class BoardService {
 			}
 			
 			// 3. 다 성공했으면 commit
+			if(result > 0) {
+				sqlSession.commit();
+			} else {
+				sqlSession.rollback();
+			}
 			
 		} catch(Exception e){
-			
+			sqlSession.rollback();
+			e.printStackTrace();
+			result = 0;
+		} finally {
+			sqlSession.close();
 		}
 		
 		
