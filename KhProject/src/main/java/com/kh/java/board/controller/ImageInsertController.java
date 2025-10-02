@@ -108,10 +108,10 @@ public class ImageInsertController extends HttpServlet {
 					
 					files.add(at);
 				}
-				// 요청처리 -> 서비스단으로 전달
-				new BoardService().insertImage(board, files);
 				
 			}
+			// 요청처리 -> 서비스단으로 전달
+			new BoardService().insertImage(board, files);
 		}
 	}
 	
