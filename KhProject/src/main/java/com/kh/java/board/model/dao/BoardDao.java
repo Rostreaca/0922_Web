@@ -76,4 +76,8 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertImageBoard", board);
 	}
 	
+	public int insertAttachmentList(SqlSession sqlSession, Attachment at) {
+		return sqlSession.insert("boardMapper.insertAttachmentList", at);
+	}
+	
 }
