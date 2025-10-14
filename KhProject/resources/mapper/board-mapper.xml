@@ -151,6 +151,32 @@
 	
 	</insert>
 	
+	<insert id="insertNotice" parameterType="com.kh.java.board.model.vo.Board">
+		<selectKey keyProperty="boardNo" resultType="long" order="BEFORE">
+			SELECT SEQ_BNO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT
+		  INTO
+		       KH_BOARD
+		       (
+		       BOARD_NO
+		     , BOARD_TYPE
+		     , BOARD_TITLE
+		     , BOARD_CONTENT
+		     , BOARD_WRITER
+		       )
+		VALUES
+		       (
+		       #{boardNo}
+		     , 3
+		     , #{boardTitle}
+		     , #{boardContent}
+		     , #{boardWriter}
+		       )
+		       
+	
+	</insert>
+	
 	<insert id="insertAttachment"
 	        parameterType="com.kh.java.board.model.vo.Category">
 	     INSERT
@@ -196,6 +222,7 @@
 		     , BOARD_CONTENT boardContent
 		  FROM
 		       KH_BOARD
+		  LEFT
 		  JOIN
 		       KH_CATEGORY USING (CATEGORY_NO)
 		  JOIN
@@ -221,6 +248,9 @@
 		       STATUS = 'Y'
 		   AND
 		       REF_BNO = #{boardNo}
+		 ORDER
+		    BY
+		       FILENO ASC
 	
 	
 	</select>
@@ -383,6 +413,118 @@
   		       )
   	</insert>
      
-     
+    <select id="selectNoticeCount" resultType="_int">
+    	SELECT
+    	       COUNT(*)
+    	  FROM
+    	       KH_BOARD
+    	 WHERE
+    	       STATUS = 'Y'
+    	   AND
+    	       BOARD_TYPE = 3
+    
+    </select>
+    <select id="selectNoticeList"
+    resultType="com.kh.java.board.model.vo.Board"
+    parameterType="com.kh.java.common.vo.PageInfo">
+    	SELECT
+     	       BOARD_NO boardNo
+     	     , BOARD_TYPE
+     	     , USER_NAME boardWriter
+     	     , BOARD_TITLE boardTitle
+     	     , CREATE_DATE createDate
+     	     , COUNT
+     	  FROM		 
+     	       KH_BOARD
+     	  JOIN
+     	       KH_MEMBER ON (BOARD_WRITER = USER_NO)
+     	 WHERE
+     	       KH_BOARD.STATUS = 'Y'
+     	   AND
+     	       BOARD_TYPE = 3
+      ORDER
+         BY
+            BOARD_NO DESC
+     OFFSET #{offset} ROWS FETCH NEXT #{boardLimit} ROWS ONLY
+    
+    
+    </select>
+    
+    	<select id="selectNotice" resultType="com.kh.java.board.model.vo.Board" parameterType="_int">
+		SELECT
+		       BOARD_NO boardNo
+		     , USER_NAME boardWriter
+		     , BOARD_TITLE boardTitle
+		     , BOARD_CONTENT boardContent
+		  FROM
+		       KH_BOARD
+		  JOIN
+		       KH_MEMBER ON (BOARD_WRITER = USER_NO)
+		 WHERE
+		       KH_BOARD.STATUS = 'Y'
+	       AND
+	           BOARD_NO = #{boardNo}      
+		  
+	</select>
+	
+	<select id="selectImageList" resultType="com.kh.java.board.model.dto.ImageBoardDto">
+		SELECT
+			   BOARD_NO boardNo
+			 , BOARD_TITLE boardTitle
+			 , COUNT
+			 , FILE_PATH filePath
+			 , CHANGE_NAME changeName
+          FROM
+               KH_BOARD
+          JOIN
+               KH_ATTACHMENT ON (REF_BNO = BOARD_NO)
+         WHERE
+               BOARD_TYPE = 2
+           AND
+               KH_BOARD.STATUS = 'Y'
+         ORDER
+            BY
+               BOARD_NO DESC
+	
+	</select>
+	
+	<resultMap id="boardResultSet" type="com.kh.java.board.model.dto.BoardDto">
+		<id column="boardNo" property="boardNo"/>
+		<result column="boardTitle" property="boardTitle" />
+		<result column="boardContent" property="boardContent" />
+		<collection property="files" ofType="com.kh.java.board.model.vo.Attachment">
+			<id column="fileNo" property="fileNo" />
+			<result column="changeName" property="changeName" />
+			<result column="filePath" property="filePath" />
+			
+		</collection>
+		
+		
+	</resultMap>
+	
+	<select id="selectBoardAndAttachment"
+			parameterType="long"
+			resultMap="boardResultSet">
+		SELECT
+			   BOARD_NO boardNo
+			 , BOARD_TITLE boardTitle
+			 , BOARD_CONTENT boardContent
+			 , FILE_NO fileNo
+			 , CHANGE_NAME changeName
+			 , FILE_PATH filePath
+	      FROM
+	           KH_BOARD
+	      JOIN
+	           KH_ATTACHMENT ON (BOARD_NO = REF_BNO)
+	     WHERE
+	           BOARD_NO = #{boardNo}
+	     ORDER
+	        BY
+	           FILE_NO ASC
+	
+	</select>
+	
+	
+	
 	
 </mapper>

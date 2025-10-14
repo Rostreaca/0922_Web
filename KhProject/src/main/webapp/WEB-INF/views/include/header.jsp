@@ -110,7 +110,7 @@
             <a class="nav-link js-scroll-trigger" href="/kh">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#">공지사항</a>
+            <a class="nav-link js-scroll-trigger" href="/kh/notice?page=1">공지사항</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="/kh/boards?page=1">게시판</a>

@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.kh.java.board.model.dto.BoardDto;
+import com.kh.java.board.model.dto.ImageBoardDto;
 import com.kh.java.board.model.vo.Attachment;
 import com.kh.java.board.model.vo.Board;
 import com.kh.java.board.model.vo.Category;
@@ -78,6 +80,34 @@ public class BoardDao {
 	
 	public int insertAttachmentList(SqlSession sqlSession, Attachment at) {
 		return sqlSession.insert("boardMapper.insertAttachmentList", at);
+	}
+	
+	public int selectNoticeCount(SqlSession sqlSession) {
+		return sqlSession.selectOne("boardMapper.selectNoticeCount");
+	}
+	
+	public List<Board> selectNoticeList(SqlSession sqlSession, PageInfo pi){
+		return sqlSession.selectList("boardMapper.selectNoticeList",pi);
+	}
+	
+	public int insertNotice(SqlSession sqlSession, Board notice) {
+		return sqlSession.insert("boardMapper.insertNotice", notice);
+	}
+	
+	public Board selectNotice(SqlSession sqlSession, int boardNo){
+		return sqlSession.selectOne("boardMapper.selectNotice", boardNo);
+	}
+	
+	public List<ImageBoardDto> selectImageList(SqlSession sqlSession){
+		return sqlSession.selectList("boardMapper.selectImageList");
+	}
+	
+	public List<Attachment> selectAttachmentList(SqlSession sqlSession, int boardNo){
+		return sqlSession.selectList("boardMapper.selectAttachment",boardNo);
+	}
+	
+	public BoardDto selectBoardAndAttachment(SqlSession sqlSession, Long boardNo) {
+		return sqlSession.selectOne("boardMapper.selectBoardAndAttachment", boardNo);
 	}
 	
 }

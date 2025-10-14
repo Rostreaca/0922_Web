@@ -23,14 +23,19 @@ public class UpdateMemberController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
+
 		request.setCharacterEncoding("UTF-8");
+
+		HttpSession session = request.getSession();
+//		Member member = (Member)session.getAttribute("userInfo");
+		
 		
 		String userName = request.getParameter("userName");
 		String email = request.getParameter("email");
-		String userId = ((Member)request.getSession().getAttribute("userInfo")).getUserId();
-		String userPwd = ((Member)request.getSession().getAttribute("userInfo")).getUserPwd();
-		int userNo = ((Member)request.getSession().getAttribute("userInfo")).getUserNo();
+		String userId = ((Member)session.getAttribute("userInfo")).getUserId();
+		String userPwd = ((Member)session.getAttribute("userInfo")).getUserPwd();
+		int userNo = ((Member)session.getAttribute("userInfo")).getUserNo();
+		
 		
 		Member member = new Member();
 		
@@ -43,6 +48,10 @@ public class UpdateMemberController extends HttpServlet {
 		Member updateMember = new MemberService().update(member);
 		
 		if(updateMember != null) {
+			
+			session.setAttribute("userInfo", updateMember);
+			session.setAttribute("alertMsg", "정보변경성공");
+			
 			response.sendRedirect(request.getContextPath()+"/edit");
 			
 		} else {
