@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>AJAX</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
 
@@ -156,7 +162,148 @@
 		- complete : 성공하든 실패하든 무조건 끝나면 실행할 콜백함수를 정의
 	</pre>
 	
+	<h2>jQuery를 사용한 AJAX요청 및 응답</h2>
+	
+	<h3>1. 버튼을 클릭하여 서버에 데이터를 전송하고 단순 문자열데이터 응답받기</h3>
 
+	<div class="form-group">
+		<div class="form-control">
+			입력 : <input type="text" id="input1" />
+		</div>
+		<div class="form-control">
+			<button class="btn btn-sm btn-primary" id="btn1">요청보내기!</button>
+		</div>
+	</div>
 
+	응답 : <label id="output1">현재 응답 없음</label>
+
+	<script>
+		
+		// 요청 보내기 버튼을 클릭하면!
+		$('#btn1').click(function(){
+			// 동기식 요청
+			//location.href = "ajax1.do?input1=ㅇㅇㅇ"
+			
+			// 비동기식 요청(jQuery버전)
+			$.ajax({
+				url : "ajax1.do",
+				type : "get",
+				data : {
+					value : $('#input1').val()
+				},
+				success : function(result){
+					console.log("AJAX요청 성공!");
+					console.log(result);
+					$("#output1").text(result);
+				},
+				error : function(){
+					console.log("AJAX요청 실패!");
+				},
+				complete : function(){
+					console.log("나는 무조건함!!!");
+				}
+			});
+			
+		});
+	
+	</script>
+
+	<hr>
+	
+	<h3>2. 버튼 클릭 시 DB조회 결과 응답</h3>
+
+	아이디 : <input type="text" id="userId" /> <br>
+	비밀번호 : <input type="password" id="userPwd" /> <br>
+	<button onclick="memberInfo();">정보조회</button>
+
+	<br/><br/>
+	사용자 이름 : <label id="name">현재 응답 없음</label>
+	사용자 이메일 : <label id="email">현재 응답 없음</label>
+
+	<script>
+		function memberInfo(){
+			
+			$.ajax({
+				url : "ajax2.do",
+				type : "post",
+				data : {
+					id : $('#userId').val(),
+					pwd : $('#userPwd').val()
+				},
+				success : function(response){
+					console.log("AJAX요청 성공!");
+					
+					console.log(response);
+					//$('#name').text(response[0]);
+					//$('#email').text(response[1]);
+					
+					$('#name').text(response.name);
+					$('#email').text(response.email);
+				},
+				error : function(e){
+					console.log(e);
+				}
+				
+			});
+			
+		}
+	
+	</script>
+	<br>
+	
+	<h3>3. 서버로 요청 후, 여러 개의 객체 응답받아 출력해보기</h3>
+	
+	<br>
+
+	아이디 입력 : <input type="text" id="search-id" />
+	
+	<table id="table-result" class="table">
+		<thead>
+			<tr>
+				<th>글번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+	
+	<button class="btn btn-sm btn-danger" onclick="find();">게시글 조회</button>
+	
+	<script>
+		function find(){
+			
+			$.ajax({
+				url : "ajax3.do",
+				type : "get",
+				success : function(result){
+					//console.log(result);
+					
+					let str = '';
+					
+					for(e of result){
+						// console.log(e.board);
+						const board = e.board;
+						
+						str += `
+								<tr>
+									<td>\${board.boardNo}</td>
+									<td>\${board.boardTitle}</td>
+									<td>\${board.boardWriter}</td>
+								</tr>
+							   `;
+					}
+					$('tbody').html(str);
+				}
+				
+			})
+			
+		}
+	</script>
+	
+	
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
 </html>
