@@ -366,6 +366,17 @@ public Map<String, Object> selectNotice(int boardNo) {
 		
 	}
 	
+	public List<Reply> selectReply(Long boardNo){
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		List<Reply> reply = bd.selectReply(sqlSession,boardNo);
+		
+		sqlSession.close();
+		
+		return reply;
+	}
+	
 	
 	
 }

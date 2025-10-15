@@ -144,10 +144,41 @@
 					
 					if(result ==='success'){
 						$('#replyContent').val('');
+						selectReply();
 					}
 				}
 			});
 			
+			
+		}
+		
+		$(function(){
+			selectReply();
+		})
+		
+		
+		function selectReply(){
+			
+			$.ajax({
+				url : "list.reply",
+				type : "get",
+				data : {
+					boardNo : ${map.board.boardNo}
+				},
+				success : function(result){
+					//console.log(result);
+					
+					const str = result.map(e=> `
+													<tr>
+														<td>\${e.replyWriter}</td>
+														<td>\${e.replyContent}</td>
+														<td>\${e.createDate}</td>
+													</tr>
+												  `).join('');
+					$('tbody').html(str);
+				}
+				
+			});
 			
 		}
 	
